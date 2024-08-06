@@ -24,7 +24,7 @@ public:
             return head;
         }
         int x=k;
-        ListNode *next, *prev=NULL;
+        ListNode *next,*prev=NULL;
         ListNode *curr=head;
         while(x--){
             next=curr->next;
@@ -32,7 +32,7 @@ public:
             prev=curr;
             curr=next;
         }
-        head->next= reverseKGroup(next,k);
+        head->next=reverseKGroup(next,k);
         return prev;
     }
 };
