@@ -1,13 +1,17 @@
 class Solution {
 public:
-    int solve(int n,int k,int val){
-        if(k>=n)
-            return 0;
-        if(n%k==0)
-            return 2+solve(n,k+k,k);
-        return 1+solve(n,k+val,val);
-    }
     int minSteps(int n) {
-        return solve(n,1,1);
+        vector<int>dp(n+1,0);
+        for(int i=2;i<=n;i++){
+            int minn=INT_MAX;
+            for(int j=2;j<=i;j++){
+                if(i%j==0){
+                    // 1 copy + (j-1) paste = j operations
+                    minn=min(minn,j+dp[i/j]);
+                }
+            }
+            dp[i]=minn;
+        }
+        return dp[n];
     }
 };
