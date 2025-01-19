@@ -1,11 +1,12 @@
 class Solution {
 public:
     string convert(string s, int n) {
-        if(n==1)
+        if(n==1){
             return s;
+        }
         string ans="";
         for(int row=0;row<n;row++){
-            // for each row the next chracter is at index 2*(n-1) 
+            // For each row the next chracter is at index 2*(n-1) 
             int increment=2*(n-1);
             // For first and last rows
             for(int i=row;i<s.length();i+=increment){
