@@ -18,7 +18,6 @@ public:
         return sum;
     }
     int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& values, int k) {
-        // Construct the given undirected tree as a graph
         vector<int> adjList[n];
         for(auto edge:edges){
             int node1=edge[0],node2=edge[1];
