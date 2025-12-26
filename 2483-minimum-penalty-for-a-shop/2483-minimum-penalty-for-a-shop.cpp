@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int bestClosingTime(string customers) {
+        int n=customers.length();
+        int Y=0;
+        for(int i=0;i<n;i++){
+            Y+=(customers[i]=='Y'?1:0);
+        }
+        int min_p=n,hour=n,y_found=0,n_found=0;
+        for(int h=0;h<=n;h++){
+            int y_remaining=Y-y_found;
+            int pen=y_remaining+n_found;
+            if(pen<min_p){
+                hour=h;
+                min_p=pen;
+            }
+            if(h<n && customers[h]=='N'){
+                n_found++;
+            }
+            if(h<n && customers[h]=='Y'){
+                y_found++;
+            }
+        }
+        return hour;
+    }
+};
