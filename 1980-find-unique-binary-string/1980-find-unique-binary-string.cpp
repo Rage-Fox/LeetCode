@@ -18,7 +18,7 @@ public:
     }
     string findDifferentBinaryString(vector<string>& nums) {
         string output;
-        int size = nums[0].length();
+        int size=nums[0].length();
         solve(output,size,nums);
         return output;
     }
