@@ -1,19 +1,18 @@
 class Solution {
 public:
-    bool checkSubarraySum(vector<int> &nums,int k) {
-        int n=nums.size(),sum=0;
-        unordered_map<int,int> mpp;
-        mpp[0]=-1;
-        for(int i=0;i<n;i++){
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        unordered_map<int,int> map;
+        map[0]=-1; // To handle the case where the sub-array starts from index 0
+        int sum=0;
+        for(int i=0;i<nums.size();i++){
             sum+=nums[i];
-            if(mpp.find(sum%k)!=mpp.end()){
-                int foundAt=mpp[sum%k];
-                if(i-foundAt>=2){
+            int rem=sum%k;
+            if(map.find(rem)!=map.end()){
+                if(i-map[rem]>=2){
                     return true;
                 }
-            }
-            else{
-                mpp[sum%k]=i;
+            } else {
+                map[rem]=i;
             }
         }
         return false;
