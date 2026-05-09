@@ -9,14 +9,14 @@ public:
         }
         sort(cars.begin(),cars.end());
         double maxTime=0.0;
-        int result=0;
+        int fleets=0;
         for(int i=n-1;i>=0;i--){
             double time=cars[i].second;
             if(time>maxTime){
                 maxTime=time;
-                result++;
+                fleets++;
             }
         }
-        return result;
+        return fleets;
     }
 };
