@@ -2,9 +2,9 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
         // https://youtu.be/zx5Sw9130L0
-        int maxArea=0;
+        int maxArea=0,n=heights.size();
         stack<pair<int,int>> stack;// pair:(index, height)
-        for(int i=0;i<heights.size();i++){
+        for(int i=0;i<n;i++){
             int start=i;
             while(!stack.empty() && stack.top().second>heights[i]){
                 pair<int,int> top=stack.top();
@@ -19,7 +19,7 @@ public:
         while(!stack.empty()){
             int index=stack.top().first;
             int height=stack.top().second;
-            maxArea=max(maxArea,height*(static_cast<int>(heights.size())-index));
+            maxArea=max(maxArea,height*(n-index));
             stack.pop();
         }
         return maxArea;
