@@ -10,26 +10,20 @@ public:
     }
     
     string get(string key, int timestamp) {
-        if(m.find(key)==m.end()){
-            return "";
-        }
-        int low=0,high=m[key].size()-1;
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            if(m[key][mid].first<timestamp){
-                low=mid+1;
-            }
-            else if(m[key][mid].first>timestamp){
-                high=mid-1;
+        auto& values=m[key];
+        int left=0,right=values.size()-1;
+        string result="";
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(values[mid].first<=timestamp){
+                result=values[mid].second;
+                left=mid+1;
             }
             else{
-                return m[key][mid].second;
+                right=mid-1;
             }
         }
-        if(high>=0){
-            return m[key][high].second;
-        }
-        return "";
+        return result;
     }
 };
 
