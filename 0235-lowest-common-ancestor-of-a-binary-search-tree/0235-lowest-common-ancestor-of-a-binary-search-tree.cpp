@@ -11,17 +11,19 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root || !p || !q){
-            return NULL;
+        // Iterative Approach => O(h) Time and O(1) Space
+        TreeNode* cur=root;
+        while(cur){
+            if(p->val>cur->val && q->val>cur->val){
+                cur=cur->right;
+            }
+            else if(p->val<cur->val && q->val<cur->val){
+                cur=cur->left;
+            }
+            else{
+                return cur;
+            }
         }
-        if(max(p->val,q->val)<root->val){
-            return lowestCommonAncestor(root->left,p,q);
-        }
-        else if(min(p->val,q->val)>root->val){
-            return lowestCommonAncestor(root->right,p,q);
-        }
-        else{
-            return root;
-        }
+        return NULL;
     }
 };
