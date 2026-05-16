@@ -11,17 +11,26 @@
  */
 class Solution {
 public:
-    int dfs(TreeNode* node,int maxVal){
-        if(!node){
-            return 0;
-        }
-        int res=(node->val>=maxVal)?1:0;
-        maxVal=max(maxVal,node->val);
-        res+=dfs(node->left,maxVal);
-        res+=dfs(node->right,maxVal);
-        return res;
-    }
     int goodNodes(TreeNode* root) {
-        return dfs(root,root->val);
+        int res=0;
+        queue<pair<TreeNode*,int>> q;
+        q.push({root,-INT_MAX});
+        while(!q.empty()){
+            int qSize=q.size();
+            while(qSize--){
+                auto [node,maxval]=q.front();
+                q.pop();
+                if(node->val>=maxval){
+                    res++;
+                }
+                if(node->left){
+                    q.push({node->left,max(maxval,node->val)});
+                }
+                if(node->right){
+                    q.push({node->right,max(maxval,node->val)});
+                }
+            }
+        }
+        return res;
     }
 };
