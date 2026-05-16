@@ -11,22 +11,26 @@
  */
 class Solution {
 public:
-    vector<int> res;
-    void dfs(TreeNode* node, int depth) {
-        if(!node){
-            return;
-        }
-        // it means we haven't yet visited any node in current depth, thus push the node's val
-        if(res.size()==depth){
-            res.push_back(node->val);
-        }
-        // recursively traverse on right nodes and then left
-        dfs(node->right,depth+1);
-        dfs(node->left,depth+1);
-    }
     vector<int> rightSideView(TreeNode* root) {
-        // USING DFS
-        dfs(root,0);
+        vector<int> res;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* rightSide=NULL;
+            int qSize=q.size();
+            while(qSize--){
+                TreeNode* node=q.front();
+                q.pop();
+                if(node){
+                    rightSide=node;
+                    q.push(node->left);
+                    q.push(node->right);
+                }
+            }
+            if(rightSide){
+                res.push_back(rightSide->val);
+            }
+        }
         return res;
     }
 };
