@@ -11,11 +11,11 @@ public:
             if(arr[top]==0){
                 return true;
             }
-            if(top-arr[top]>=0 and vis[top-arr[top]]==false){
+            if(top-arr[top]>=0 and !vis[top-arr[top]]){
                 q.push(top-arr[top]);
                 vis[top-arr[top]]=true;
             }
-            if(top+arr[top]<arr.size() and vis[top+arr[top]]==false){
+            if(top+arr[top]<arr.size() and !vis[top+arr[top]]){
                 q.push(top+arr[top]);
                 vis[top+arr[top]]=true;
             }
