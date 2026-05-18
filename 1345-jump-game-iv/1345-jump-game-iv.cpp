@@ -10,7 +10,6 @@ public:
         q.push({0,0});
         vector<int> vis(n,-1);
         vis[0]=1;
-        int minn=1e9+7;
         while(!q.empty()){
             int node=q.front().first,score=q.front().second;
             q.pop();
@@ -34,6 +33,6 @@ public:
             // Removing this leads to TLE as we pushed all possible arr[i]=arr[j] to the queue and we don't need to check again!
             mpp[arr[node]].clear();
         }
-        return minn;
+        return 1e9+7;
     }
 };
