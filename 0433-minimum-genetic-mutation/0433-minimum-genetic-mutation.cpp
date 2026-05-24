@@ -9,27 +9,32 @@ public:
         }
         return c==1;
     }
-    int minMutation(string startGene, string endGene, vector<string>& bank) {
+    int minMutation(string startGene, string endGene, vector<string> bank) {
         if(find(bank.begin(),bank.end(),endGene)==bank.end()){
             return -1;
         }
-        queue<pair<string,int>> q;
-        q.push({startGene,0});
+        queue<string> q;
+        q.push(startGene);
+        int iter=0;
         while(!q.empty()){
-            auto [s,iter]=q.front();
-            q.pop();
-            if(s==endGene){
-                return iter;
-            }
-            int i=0;
-            for(int i=0;i<bank.size();){
-                if(isValidMutation(s,bank[i])){
-                    q.push({bank[i],iter+1});
-                    bank.erase(bank.begin()+i);
-                    continue;
+            int size=q.size();
+            while(size--){
+                auto s=q.front();
+                q.pop();
+                if(s==endGene){
+                    return iter;
                 }
-                i++;
+                int i=0;
+                for(int i=0;i<bank.size();){
+                    if(isValidMutation(s,bank[i])){
+                        q.push(bank[i]);
+                        bank.erase(bank.begin()+i);
+                        continue;
+                    }
+                    i++;
+                }
             }
+            iter++;
         }
         return -1;
     }
