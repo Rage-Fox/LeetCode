@@ -1,23 +1,38 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        int n = matrix.size();
-        int m = matrix[0].size();
-        unordered_set<int> setRows; 
-        unordered_set<int> setColumns; 
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(matrix[i][j] == 0){
-                    setRows.insert(i);
-                    setColumns.insert(j);
+        int rows = matrix.size(), cols = matrix[0].size();
+        // rowZero is to track mat[0][0] as first col or else first row is 0's
+        bool rowZero = false;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (matrix[r][c] == 0) {
+                    matrix[0][c] = 0;
+                    if (r > 0) {
+                        matrix[r][0] = 0;
+                    } else {
+                        // for mat[0][0] case
+                        rowZero = true;
+                    }
                 }
             }
         }
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(setRows.count(i) > 0 || setColumns.count(j) > 0){
-                    matrix[i][j] = 0;
+        // handle first row and first col later
+        for (int r = 1; r < rows; r++) {
+            for (int c = 1; c < cols; c++) {
+                if (matrix[0][c] == 0 || matrix[r][0] == 0) {
+                    matrix[r][c] = 0;
                 }
+            }
+        }
+        if (matrix[0][0] == 0) {
+            for (int r = 0; r < rows; r++) {
+                matrix[r][0] = 0;
+            }
+        }
+        if (rowZero) {
+            for (int c = 0; c < cols; c++) {
+                matrix[0][c] = 0;
             }
         }
     }
