@@ -1,17 +1,21 @@
 class Solution {
 public:
+    double helper(double x, long n) {
+        if (n == 0) {
+            return 1;
+        }
+        double half = helper(x, n / 2);
+        return (n % 2 == 0) ? half * half : x * half * half;
+    }
     double myPow(double x, int n) {
         //Recursive Binary Exponentiation in C++
-        if(n==0)    return 1;
-        if(n<0){
-            n=abs(n);
-            x=1/x;
+        if(x==0){
+            return 0;
         }
-        if(n%2==0){
-            return myPow(x*x,n/2);
+        if(n==0){
+            return 1;
         }
-        else{
-            return x*myPow(x,n-1);
-        }
+        double res = helper(x, abs(static_cast<long>(n)));
+        return (n >= 0) ? res : 1 / res;
     }
 };
