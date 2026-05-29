@@ -1,9 +1,8 @@
 class Solution {
 public:
-    vector<vector<int>> bfs(vector<vector<int>> &heights,int type){
+    vector<vector<int>> bfs(vector<vector<int>> &heights,int type,vector<vector<int>> &used){
         int n=heights.size();
         int m=heights[0].size();
-        vector<vector<int>> used(n,vector<int>(m));
         queue<pair<int,int>> q;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
@@ -35,11 +34,13 @@ public:
         return used;
     }
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        vector<vector<int>> usedp=bfs(heights,0);
-        vector<vector<int>> useda=bfs(heights,1);
-        vector<vector<int>> ans;
         int n=heights.size();
         int m=heights[0].size();
+        vector<vector<int>> usedp(n,vector<int>(m));
+        bfs(heights,0,usedp);
+        vector<vector<int>> useda(n,vector<int>(m));
+        bfs(heights,1,useda);
+        vector<vector<int>> ans;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(usedp[i][j] && useda[i][j]){
