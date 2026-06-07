@@ -37,7 +37,6 @@ public:
                 break;
             }
         }
-
         return mpp[root];
     }
 };
