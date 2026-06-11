@@ -1,21 +1,26 @@
 class Solution {
 public:
-    vector<int> maxSlidingWindow(vector<int>& arr, int k) {
-        priority_queue<pair<int,int>> pq;
-        vector<int> v;
-        int n=arr.size();
-        for(int i=0;i<k;i++){
-            pq.push({arr[i],i});
-        }
-        v.push_back(pq.top().first);
-        for(int i=k;i<n;i++){
-            pq.push({arr[i],i});
-            // Removing the top element of PQ if the current maximum is from previous windows
-            while(pq.top().second<=i-k){
-                pq.pop();
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        // monotonic deque
+        int n = nums.size();
+        vector<int> output(n - k + 1);
+        deque<int> q;
+        int l = 0, r = 0;
+        while (r < n) {
+            while (!q.empty() && nums[q.back()] < nums[r]) {
+                q.pop_back();
             }
-            v.push_back(pq.top().first);
+            q.push_back(r);
+            // If the left pointer passes the front index, remove it (it's outside the window)
+            if (l > q.front()) {
+                q.pop_front();
+            }
+            if ((r + 1) >= k) {
+                output[l] = nums[q.front()];
+                l++;
+            }
+            r++;
         }
-        return v;
+        return output;
     }
 };
