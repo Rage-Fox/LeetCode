@@ -21,7 +21,7 @@ public:
         long long ans = 1;
         // The number of ways to choose an odd count of 1s among max_depth edges is 2^(max_depth-1)
         while (--depth) {
-            ans = (ans * 2) % MOD;
+            ans = (2 * ans) % MOD;
         }
         return ans;
     }
