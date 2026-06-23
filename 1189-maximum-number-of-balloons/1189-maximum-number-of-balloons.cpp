@@ -1,16 +1,12 @@
 class Solution {
 public:
     int maxNumberOfBalloons(string text) {
-        map<char, int> countText;
-        map<char, int> balloon;
-        for (char c : text)
-            countText[c]++;
-        for (char c : string("balloon")) {
-            balloon[c]++;
+        int freq[26] = {0};
+        for (char c : text) {
+            freq[c - 'a']++;
         }
-        int res = text.length();
-        for (const auto& [key, value] : balloon)
-            res = min(res, countText[key] / value);
-        return res;
+        // balloon: 1-b,1-a,2-l,2-o,1-n
+        return min({freq['a' - 'a'], freq['b' - 'a'], freq['l' - 'a'] / 2,
+                    freq['o' - 'a'] / 2, freq['n' - 'a']});
     }
 };
