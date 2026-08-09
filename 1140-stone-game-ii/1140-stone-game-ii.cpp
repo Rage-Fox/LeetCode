@@ -23,9 +23,8 @@ public:
             if(i+x>n){
                 break;
             }
-            // We always choose a set of continuous window. So, performing prefix may make it easy without using extra loop.
+            // Prefix for continuous window
             total+=piles[i+x-1];
-            // We only want alice's max result. So total is going to add in this case. As for bob, we don't need his total as a result.
             if(isAlice){
                 // We always want maximum for Alice.
                 res=max(res,total+dfs(!isAlice,i+x,max(M,x),piles));
