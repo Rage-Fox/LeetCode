@@ -1,9 +1,7 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int n=s.size();
-        int m=t.size();
-        int l=0,r;
+        int n=s.size(),m=t.size(),l=0,r;
         unordered_map<char,int> sc,tc;
         for(char i:t){
             tc[i]++;
@@ -18,17 +16,16 @@ public:
             if(sc[c]<=tc[c]){
                 cnt++;
             }
-            if(cnt==m){
-                while(tc.count(s[l])==0 or sc[s[l]]>tc[s[l]]){
-                    if(sc.count(s[l])!=0){
-                        sc[s[l]]--;
-                    }
-                    l++;
+            while (cnt == m) {
+                if ((r - l + 1) < minn) {
+                    minn = r - l + 1;
+                    minLeft = l;
                 }
-                if(r-l+1<minn){
-                    minn=r-l+1;
-                    minLeft=l;
+                sc[s[l]]--;
+                if (tc.count(s[l]) && sc[s[l]] < tc[s[l]]) {
+                    cnt--;
                 }
+                l++;
             }
         }
         if(minn==INT_MAX){
