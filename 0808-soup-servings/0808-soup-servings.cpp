@@ -14,7 +14,7 @@ public:
         if(mp.find({a,b})!=mp.end()){
             return mp[{a,b}];
         }
-        double op1=recur(a-100 , b);
+        double op1=recur(a-100,b);
         double op2=recur(a-75,b-25);
         double op3=recur(a-50,b-50);
         double op4=recur(a-25,b-75);
