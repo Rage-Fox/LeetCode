@@ -6,10 +6,12 @@ public:
         for(int &num:arr){
             sum+=num;
             if(sum%2!=0){
+                // If current prefix sum is odd, add the number of even subarrays
                 oddSum++;
                 ans+=((1+evenSum)%mod);
             }
             else{
+                // If current prefix sum is even, add the number of odd subarrays
                 evenSum++;
                 ans=((ans+oddSum)%mod);
             }
