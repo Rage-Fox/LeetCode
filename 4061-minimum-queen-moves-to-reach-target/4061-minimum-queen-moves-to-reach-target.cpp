@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minQueenMoves(vector<int>& source, vector<int>& target) {
+        if (source[0] == target[0] && source[1] == target[1])
+            return 0;
+        // same row
+        if (source[0] == target[0])
+            return 1;
+        // same col
+        if (source[1] == target[1])
+            return 1;
+        // same diagonal
+        if (abs(source[0] - target[0]) == abs(source[1] - target[1]))
+            return 1;
+        return 2;
+    }
+};
